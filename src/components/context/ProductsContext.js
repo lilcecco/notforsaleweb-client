@@ -12,7 +12,7 @@ export const ProductsProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const res = await fetch('/api/data/products');
+      const res = await fetch(`${process.env.SERVER_URL}/api/data/products`);
       const data = await res.json();
       setProducts(data.map(product => { return { ...product, price: JSON.parse(product.price), images: JSON.parse(product.images) } }));
     }

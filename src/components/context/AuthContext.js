@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchUserLogged = async () => {
-      const res = await fetch('/api/auth/userLogged');
+      const res = await fetch(`${process.env.SERVER_URL}/api/auth/userLogged`);
       const data = await res.json();
       if (data?.error) {
         setUserLogged(false);
@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const registerUser = async ({ name, surname, address, country, city, zip_code, email, password }) => {
-    const res = await fetch('/api/auth/register', {
+    const res = await fetch(`${process.env.SERVER_URL}/api/auth/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   const loginUser = async ({ email, password }) => {
-    const res = await fetch('/api/auth/login', {
+    const res = await fetch(`${process.env.SERVER_URL}/api/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
