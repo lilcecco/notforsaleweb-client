@@ -34,7 +34,7 @@ export const CheckoutProvider = ({ children }) => {
 
   useEffect(() => {
     const getCustomerId = async () => {
-      const res = await fetch(`${process.env.SERVER_URL}/api/data/customerId`);
+      const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/data/customerId`);
       const data = await res.json();
   
       setCustomerId(data.customer_id);
@@ -46,7 +46,7 @@ export const CheckoutProvider = ({ children }) => {
   const checkout = async (registerCustomerId) => {
     const customer_id = registerCustomerId || customerId;
 
-    const res = await fetch(`${process.env.SERVER_URL}/api/checkout/`, {
+    const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/checkout/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ export const CheckoutProvider = ({ children }) => {
   }
 
   const createPortalSession = async () => {
-    const res = await fetch(`${process.env.SERVER_URL}/api/checkout/createPortalSession`, {
+    const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/checkout/createPortalSession`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
