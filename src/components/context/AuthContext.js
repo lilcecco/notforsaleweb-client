@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   const logout = async () => {
-    const res = await fetch('/api/auth/logout', {
+    const res = await fetch('https://notforsaleweb-a185cdef4039.herokuapp.com/api/auth/logout', {
       method: 'GET',
       headers
     });
