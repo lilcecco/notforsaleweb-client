@@ -8,18 +8,18 @@ export const AuthProvider = ({ children }) => {
   const [userLogged, setUserLogged] = useState(false);
 
   let headers = new Headers();
-  useEffect(() => {
-    headers.append('Access-Control-Allow-Origin', '*');
-    headers.append('Access-Control-Allow-Credentials', 'true');
-  }, []);
 
   useEffect(() => {
+
+    headers.append('Access-Control-Allow-Origin', '*');
+    headers.append('Access-Control-Allow-Credentials', 'true');
+
     const fetchUserLogged = async () => {
       const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/auth/userLogged`, {
         method: 'GET',
         headers
       });
-      
+
       const data = await res.json();
       if (data?.error) {
         setUserLogged(false);
@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   const loginUser = async ({ email, password }) => {
-    
+
     const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/auth/login`, {
       method: 'POST',
       headers: {
@@ -68,7 +68,7 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
-  const contextData = { userLogged, headers, registerUser, loginUser, setUserLogged }
+  const contextData = { userLogged, registerUser, loginUser, setUserLogged }
 
   return (
     <AuthContext.Provider value={contextData}>

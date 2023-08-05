@@ -9,9 +9,30 @@ export default CheckoutContext;
 
 export const CheckoutProvider = ({ children }) => {
   const { cartProducts } = useContext(ProductsContext);
-  const { userLogged, headers } = useContext(AuthContext);
+  const { userLogged } = useContext(AuthContext);
 
   const [customerId, setCustomerId] = useState('');
+
+  let headers = new Headers();
+
+  useEffect(() => {
+    headers.append('Access-Control-Allow-Origin', '*');
+    headers.append('Access-Control-Allow-Credentials', 'true');
+  }, []);
+
+  useEffect(() => {
+    const getCustomerId = async () => {
+      const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/data/customerId`, {
+        method: 'GET',
+        headers
+      });
+      const data = await res.json();
+
+      if (!data?.error) setCustomerId(data.customer_id);
+    }
+
+    getCustomerId();
+  }, [userLogged]);
   
   const checkSelectedBundle = (prodQuantity) => {
     let selectedBundle;
@@ -31,20 +52,6 @@ export const CheckoutProvider = ({ children }) => {
     const selectedBundle = checkSelectedBundle(cartProduct.quantity);
     return { price: cartProduct.price[selectedBundle]?.price_id, quantity: cartProduct.quantity };
   }), [cartProducts]);
-
-  useEffect(() => {
-    const getCustomerId = async () => {
-      const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/data/customerId`, {
-        method: 'GET',
-        headers
-      });
-      const data = await res.json();
-
-      if (!data?.error) setCustomerId(data.customer_id);
-    }
-
-    getCustomerId();
-  }, [userLogged]);
 
   const checkout = async (registerCustomerId) => {
     const customer_id = registerCustomerId || customerId;
