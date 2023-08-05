@@ -33,14 +33,14 @@ const Checkout = () => {
     const registerData = await registerUser({ name, surname, address, country, city, zip_code, email, password });
 
     if (registerData?.error) {
-      return console.log(registerData.error);
+      return alert(registerData.error);
     }
 
     // login user
     const loginData = loginUser({ email, password });
 
     if (loginData?.error) {
-      return console.log(loginData.error);
+      return alert(loginData.error);
     }
 
     // checkout order

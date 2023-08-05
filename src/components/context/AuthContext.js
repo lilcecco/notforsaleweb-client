@@ -13,7 +13,6 @@ export const AuthProvider = ({ children }) => {
       const data = await res.json();
       if (data?.error) {
         setUserLogged(false);
-        console.log(data?.error);
       } else {
         setUserLogged(true);
       }

@@ -14,7 +14,12 @@ export const ProductsProvider = ({ children }) => {
     const fetchProducts = async () => {
       const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/data/products`);
       const data = await res.json();
-      setProducts(data.map(product => { return { ...product, price: JSON.parse(product.price), images: JSON.parse(product.images) } }));
+
+      if (data?.error) {
+        alert(data.error);
+      } else {
+        setProducts(data.map(product => { return { ...product, price: JSON.parse(product.price), images: JSON.parse(product.images) } }));
+      }
     }
 
     fetchProducts();

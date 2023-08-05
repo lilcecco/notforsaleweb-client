@@ -18,9 +18,9 @@ const Login = () => {
     if (email === '' || password === '') return alert('empty fields');
     if (!/[\w.-]+@[a-z-]+\.[a-z]{2,3}/.test(email)) return alert('invalid email address');
 
-    const data = await loginUser({ email, password });
-    if (data?.error) {
-      console.log(data.error);
+    const loginData = await loginUser({ email, password });
+    if (loginData?.error) {
+      alert(loginData.error);
     } else {
       navigate('/shoppingCart');
     }
