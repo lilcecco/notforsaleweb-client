@@ -19,7 +19,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "https://notforsaleweb-a185cdef4039.herokuapp.com/",
+  "proxy": "https://notforsaleweb-a185cdef4039.herokuapp.com",
   "eslintConfig": {
     "extends": [
       "react-app",
