@@ -1,0 +1,110 @@
+.Login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /* margin-top: 80px; */
+}
+
+.Login h2 {
+  margin-bottom: 40px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 360px;
+  padding: 30px 40px;
+  margin-bottom: 30px;
+  gap: 30px 0;
+  background-color: var(--color-2);
+  border: 1px solid var(--color-1);
+}
+
+.login-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px 0;
+}
+
+.forgot-password-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.forgot-password-cta {
+  font-size: 12px;
+  color: var(--color-3);
+  text-decoration: underline;
+}
+
+.login-form input {
+  width: 280px;
+  padding: 13px;
+  background-color: var(--color-2);
+  border: 1px solid var(--color-4);
+  font-size: 14px;
+}
+
+.login-form input:focus {
+  border: 1px solid var(--color-1);
+}
+
+.login-form input[type="submit"] {
+  border: none;
+  height: auto;
+  padding: 12px;
+  background-color: var(--color-1);
+  color: var(--color-2);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.login-form input[type="submit"]:focus {
+  border: none;
+}
+
+.login-form .cta-btn {
+  width: 100%;
+}
+
+.sign-up-link-container {
+  width: 360px;
+  padding: 25px 40px;
+  border: 1px solid var(--color-3);
+  border-radius: 5px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.sign-up-link-container span {
+  color: var(--color-3);
+  text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 992px) {
+  .Login {
+    height: auto;
+    padding: 80px 0;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .login-form {
+    width: 330px;
+  }
+
+  .login-form input {
+    width: 250px;
+  }
+  
+  .sign-up-link-container {
+    width: 330px;
+    padding: 25px 20px;
+  }
+}

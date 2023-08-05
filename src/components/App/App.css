@@ -1,0 +1,18 @@
+.alert-banner {
+  padding: 10px 0;
+  background-color: var(--color-1);
+  color: var(--color-2);
+  text-align: center;
+  font-weight: 700;
+}
+
+.whatsapp-btn {
+  position: fixed;
+  bottom: 30px; right: 30px;
+  width: 60px;
+  height: 60px;
+  padding: 2px;
+  border-radius: 50%;
+  background-color: #4ac959;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+}
