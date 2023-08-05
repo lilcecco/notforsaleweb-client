@@ -37,11 +37,7 @@ export const CheckoutProvider = ({ children }) => {
       const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/data/customerId`);
       const data = await res.json();
 
-      if (data?.error) {
-        alert(data.error);
-      } else {
-        setCustomerId(data.customer_id);
-      }
+      if (!data?.error) setCustomerId(data.customer_id);
     }
 
     getCustomerId();

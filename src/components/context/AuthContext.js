@@ -38,9 +38,15 @@ export const AuthProvider = ({ children }) => {
   }
 
   const loginUser = async ({ email, password }) => {
+    let headers = new Headers();
+
+    headers.append('Access-Control-Allow-Origin', '*');
+    headers.append('Access-Control-Allow-Credentials', 'true');
+    
     const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/auth/login`, {
       method: 'POST',
       headers: {
+        ...headers,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ email, password })
