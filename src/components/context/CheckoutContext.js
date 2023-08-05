@@ -28,7 +28,7 @@ export const CheckoutProvider = ({ children }) => {
       });
       const data = await res.json();
 
-      setCustomerId(data.customer_id);
+      if (!data?.error) setCustomerId(data.customer_id);
     }
 
     getCustomerId();
