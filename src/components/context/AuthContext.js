@@ -68,7 +68,15 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
-  const contextData = { userLogged, registerUser, loginUser, setUserLogged }
+  const logout = async () => {
+    const res = await fetch('/api/auth/logout', {
+      method: 'GET',
+      headers
+    });
+    if (res.status === 200) setUserLogged(false);
+  }
+
+  const contextData = { userLogged, registerUser, loginUser, setUserLogged, logout }
 
   return (
     <AuthContext.Provider value={contextData}>

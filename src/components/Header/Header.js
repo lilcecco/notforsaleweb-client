@@ -12,16 +12,11 @@ import './Header.css';
 
 const Header = () => {
   const { addedProd, cartProducts } = useContext(ProductsContext);
-  const { userLogged, setUserLogged } = useContext(AuthContext);
+  const { userLogged, logout } = useContext(AuthContext);
 
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navigate = useNavigate();
-
-  const logout = async () => {
-    const res = await fetch('/api/auth/logout');
-    if (res.status === 200) setUserLogged(false);
-  }
 
   return (
     <div className="Header">
