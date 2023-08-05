@@ -1,18 +1,24 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 import useCookie from '../customHooks/useCookie';
+import AuthContext from '../context/AuthContext';
 
 const ProductsContext = createContext();
 
 export default ProductsContext;
 
 export const ProductsProvider = ({ children }) => {
+  const { headers } = useContext(AuthContext);
+  
   const [products, setProducts] = useState([]);
   const [addedProd, setAddedProd] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/data/products`);
+      const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/data/products`, {
+        method: 'GET',
+        headers
+      });
       const data = await res.json();
 
       if (data?.error) {

@@ -7,9 +7,19 @@ export default AuthContext;
 export const AuthProvider = ({ children }) => {
   const [userLogged, setUserLogged] = useState(false);
 
+  let headers = new Headers();
+  useEffect(() => {
+    headers.append('Access-Control-Allow-Origin', '*');
+    headers.append('Access-Control-Allow-Credentials', 'true');
+  }, []);
+
   useEffect(() => {
     const fetchUserLogged = async () => {
-      const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/auth/userLogged`);
+      const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/auth/userLogged`, {
+        method: 'GET',
+        headers
+      });
+      
       const data = await res.json();
       if (data?.error) {
         setUserLogged(false);
@@ -19,12 +29,14 @@ export const AuthProvider = ({ children }) => {
     }
 
     fetchUserLogged();
+
   }, []);
 
   const registerUser = async ({ name, surname, address, country, city, zip_code, email, password }) => {
     const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/auth/register`, {
       method: 'POST',
       headers: {
+        ...headers,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ name, surname, address, country, city, zip_code, email, password })
@@ -38,10 +50,6 @@ export const AuthProvider = ({ children }) => {
   }
 
   const loginUser = async ({ email, password }) => {
-    let headers = new Headers();
-
-    headers.append('Access-Control-Allow-Origin', '*');
-    headers.append('Access-Control-Allow-Credentials', 'true');
     
     const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/auth/login`, {
       method: 'POST',
@@ -60,7 +68,7 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
-  const contextData = { userLogged, registerUser, loginUser, setUserLogged }
+  const contextData = { userLogged, headers, registerUser, loginUser, setUserLogged }
 
   return (
     <AuthContext.Provider value={contextData}>

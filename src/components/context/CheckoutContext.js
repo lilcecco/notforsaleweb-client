@@ -9,7 +9,7 @@ export default CheckoutContext;
 
 export const CheckoutProvider = ({ children }) => {
   const { cartProducts } = useContext(ProductsContext);
-  const { userLogged } = useContext(AuthContext);
+  const { userLogged, headers } = useContext(AuthContext);
 
   const [customerId, setCustomerId] = useState('');
   
@@ -34,7 +34,10 @@ export const CheckoutProvider = ({ children }) => {
 
   useEffect(() => {
     const getCustomerId = async () => {
-      const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/data/customerId`);
+      const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/data/customerId`, {
+        method: 'GET',
+        headers
+      });
       const data = await res.json();
 
       if (!data?.error) setCustomerId(data.customer_id);
@@ -49,6 +52,7 @@ export const CheckoutProvider = ({ children }) => {
     const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/checkout/`, {
       method: 'POST',
       headers: {
+        ...headers,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ customer_id, cartProducts, line_items})
@@ -68,6 +72,7 @@ export const CheckoutProvider = ({ children }) => {
     const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/checkout/createPortalSession`, {
       method: 'POST',
       headers: {
+        ...headers,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ customer_id: customerId })
