@@ -68,7 +68,7 @@ export const CheckoutProvider = ({ children }) => {
 
     if (res.status === 200) {
       if (data?.error) {
-        console.log(data.error);
+        alert(data.error);
       } else {
         window.location = data.url;
       }
