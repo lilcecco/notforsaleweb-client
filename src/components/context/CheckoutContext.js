@@ -55,6 +55,7 @@ export const CheckoutProvider = ({ children }) => {
 
   const checkout = async (registerCustomerId) => {
     console.log(registerCustomerId, customerId);
+
     const customer_id = registerCustomerId || customerId;
 
     // const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/checkout/`, {
