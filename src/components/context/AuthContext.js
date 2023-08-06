@@ -56,8 +56,9 @@ export const AuthProvider = ({ children }) => {
       headers: {
         ...headers,
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
-      credentials: 'include',
+      credentials: 'include', // cookies?
       withCredentials: true,
       body: JSON.stringify({ email, password })
     });
