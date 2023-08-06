@@ -33,6 +33,11 @@ export const CheckoutProvider = ({ children }) => {
 
     getCustomerId();
   }, [userLogged]);
+
+  const line_items = useMemo(() => cartProducts.map(cartProduct => {
+    const selectedBundle = checkSelectedBundle(cartProduct.quantity);
+    return { price: cartProduct.price[selectedBundle]?.price_id, quantity: cartProduct.quantity };
+  }), [cartProducts]);
   
   const checkSelectedBundle = (prodQuantity) => {
     let selectedBundle;
@@ -48,31 +53,27 @@ export const CheckoutProvider = ({ children }) => {
     return selectedBundle;
   }
 
-  const line_items = useMemo(() => cartProducts.map(cartProduct => {
-    const selectedBundle = checkSelectedBundle(cartProduct.quantity);
-    return { price: cartProduct.price[selectedBundle]?.price_id, quantity: cartProduct.quantity };
-  }), [cartProducts]);
-
   const checkout = async (registerCustomerId) => {
+    console.log(registerCustomerId, customerId);
     const customer_id = registerCustomerId || customerId;
 
-    const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/checkout/`, {
-      method: 'POST',
-      headers: {
-        ...headers,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ customer_id, cartProducts, line_items})
-    });
-    const data = await res.json();
+    // const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/checkout/`, {
+    //   method: 'POST',
+    //   headers: {
+    //     ...headers,
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({ customer_id, cartProducts, line_items})
+    // });
+    // const data = await res.json();
 
-    if (res.status === 200) {
-      if (data?.error) {
-        alert(data.error);
-      } else {
-        window.location = data.url;
-      }
-    }
+    // if (res.status === 200) {
+    //   if (data?.error) {
+    //     alert(data.error);
+    //   } else {
+    //     window.location = data.url;
+    //   }
+    // }
   }
 
   const createPortalSession = async () => {
