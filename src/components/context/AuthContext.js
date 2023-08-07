@@ -5,7 +5,7 @@ const AuthContext = createContext();
 export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
-  const [accessToken, setAddressToken] = useCookie('accessToken', '');
+  // const [accessToken, setAddressToken] = useCookie('accessToken', '');
   
   const [userLogged, setUserLogged] = useState(false);
 
@@ -68,7 +68,7 @@ export const AuthProvider = ({ children }) => {
     if (res.status === 200) {
       if (!data?.error) setUserLogged(true);
       console.log(data.accessToken);
-      setAddressToken(data.accessToken);
+      // setAddressToken(data.accessToken);
       return data;
     } else {
       alert('Qualcosa è andato storto');
