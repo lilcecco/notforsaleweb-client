@@ -68,9 +68,11 @@ export const AuthProvider = ({ children }) => {
     });
     const data = await res.json();
     if (res.status === 200) {
-      if (!data?.error) setUserLogged(true);
-      console.log(data.accessToken);
-      setAddressToken(data.accessToken);
+      if (!data?.error) {
+        setUserLogged(true);
+        console.log(data.accessToken);
+        setAddressToken(data.accessToken);
+      }
       return data;
     } else {
       alert('Qualcosa è andato storto');
