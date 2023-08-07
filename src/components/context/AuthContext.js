@@ -5,9 +5,9 @@ const AuthContext = createContext();
 export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
-  const [userLogged, setUserLogged] = useState(false);
-
   const [accessToken, setAddressToken] = useCookie('accessToken', '');
+  
+  const [userLogged, setUserLogged] = useState(false);
 
   let headers = new Headers();
 
