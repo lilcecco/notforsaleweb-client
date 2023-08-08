@@ -8,7 +8,6 @@ export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
   const [accessToken, setAddressToken] = useCookie('accessToken', '');
-  
   const [userLogged, setUserLogged ] = useState(false);
 
   let headers = new Headers();
@@ -21,22 +20,6 @@ export const AuthProvider = ({ children }) => {
 
     headers.append('Access-Control-Allow-Origin', '*');
     headers.append('Access-Control-Allow-Credentials', 'true');
-
-    // const fetchUserLogged = async () => {
-    //   const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/auth/userLogged`, {
-    //     method: 'GET',
-    //     headers
-    //   });
-
-    //   const data = await res.json();
-    //   if (data?.error) {
-    //     setUserLogged(false);
-    //   } else {
-    //     setUserLogged(true);
-    //   }
-    // }
-
-    // fetchUserLogged();
 
   }, []);
 
@@ -95,7 +78,7 @@ export const AuthProvider = ({ children }) => {
     if (res.status === 200) setUserLogged(false);
   }
 
-  const contextData = { userLogged, registerUser, loginUser, setUserLogged, logout }
+  const contextData = { accessToken, userLogged, registerUser, loginUser, setUserLogged, logout }
 
   return (
     <AuthContext.Provider value={contextData}>

@@ -9,7 +9,7 @@ export default CheckoutContext;
 
 export const CheckoutProvider = ({ children }) => {
   const { cartProducts } = useContext(ProductsContext);
-  const { userLogged } = useContext(AuthContext);
+  const { userLogged, accessToken } = useContext(AuthContext);
 
   const [customerId, setCustomerId] = useState('');
 
@@ -24,9 +24,11 @@ export const CheckoutProvider = ({ children }) => {
     const getCustomerId = async () => {
       const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/data/customerId`, {
         method: 'GET',
-        headers
+        headers: {
+          ...headers,
+          'Authentication': `Bearer ${accessToken}`
+        }
       });
-      const data = await res.json();
       console.log(data);
 
       if (!data?.error) setCustomerId(data.customer_id);
