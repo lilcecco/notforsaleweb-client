@@ -13,10 +13,6 @@ export const AuthProvider = ({ children }) => {
   let headers = new Headers();
 
   useEffect(() => {
-    console.log(accessToken);
-  }, [accessToken])
-
-  useEffect(() => {
 
     headers.append('Access-Control-Allow-Origin', '*');
     headers.append('Access-Control-Allow-Credentials', 'true');

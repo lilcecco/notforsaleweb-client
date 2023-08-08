@@ -56,6 +56,14 @@ export const CheckoutProvider = ({ children }) => {
     return { price: cartProduct.price[selectedBundle]?.price_id, quantity: cartProduct.quantity };
   }), [cartProducts]);
 
+  const stripeCheckout = async (url) => {
+    const res = await fetch(url, {
+      method: 'GET',
+      headers
+    });
+    console.log(res);
+  }
+
   const checkout = async (registerCustomerId) => {
     const customer_id = registerCustomerId || customerId;
 
@@ -74,10 +82,8 @@ export const CheckoutProvider = ({ children }) => {
         alert(data.error);
       } else {
         // window.location = data.url;
-        await fetch(data.url, {
-          method: 'GET',
-          headers
-        });
+        console.log(data.url)
+        stripeCheckout(data.url);
       }
     }
   }
