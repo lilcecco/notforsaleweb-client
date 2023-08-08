@@ -13,16 +13,12 @@ export const CheckoutProvider = ({ children }) => {
 
   const [customerId, setCustomerId] = useState('');
 
-  // let headers = new Headers();
-  // useEffect(() => {
-  //   headers.append('Access-Control-Allow-Origin', '*');
-  //   headers.append('Access-Control-Allow-Credentials', 'true');
-  // }, []);
+  let headers = new Headers();
 
-  let headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Credentials': 'true'
-  }
+  useEffect(() => {
+    headers.append('Access-Control-Allow-Origin', '*');
+    headers.append('Access-Control-Allow-Credentials', 'true');
+  }, []);
 
   useEffect(() => {
     const getCustomerId = async () => {
@@ -86,9 +82,9 @@ export const CheckoutProvider = ({ children }) => {
       if (data?.error) {
         alert(data.error);
       } else {
-        // window.location = data.url;
         console.log(data.url)
-        stripeCheckout(data.url);
+        window.location = data.url;
+        // stripeCheckout(data.url);
       }
     }
   }
