@@ -30,7 +30,6 @@ export const CheckoutProvider = ({ children }) => {
         }
       });
       const data = await res.json();
-      console.log(data);
 
       if (!data?.error) setCustomerId(data.customer_id);
     }
@@ -74,7 +73,11 @@ export const CheckoutProvider = ({ children }) => {
       if (data?.error) {
         alert(data.error);
       } else {
-        window.location = data.url;
+        // window.location = data.url;
+        await fetch(data.url, {
+          method: 'GET',
+          headers
+        });
       }
     }
   }
