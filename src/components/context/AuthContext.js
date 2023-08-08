@@ -52,16 +52,12 @@ export const AuthProvider = ({ children }) => {
       headers: {
         ...headers,
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
       },
-      credentials: 'include', // cookies?
-      withCredentials: true,
       body: JSON.stringify({ email, password })
     });
     const data = await res.json();
     if (res.status === 200) {
       if (!data?.error) {
-        console.log(data.accessToken);
         setAddressToken(data.accessToken);
       }
       return data;
