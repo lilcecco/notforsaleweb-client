@@ -37,11 +37,6 @@ export const CheckoutProvider = ({ children }) => {
 
     getCustomerId();
   }, [userLogged]);
-
-  const line_items = useMemo(() => cartProducts.map(cartProduct => {
-    const selectedBundle = checkSelectedBundle(cartProduct.quantity);
-    return { price: cartProduct.price[selectedBundle]?.price_id, quantity: cartProduct.quantity };
-  }), [cartProducts]);
   
   const checkSelectedBundle = (prodQuantity) => {
     let selectedBundle;
@@ -56,6 +51,11 @@ export const CheckoutProvider = ({ children }) => {
 
     return selectedBundle;
   }
+
+  const line_items = useMemo(() => cartProducts.map(cartProduct => {
+    const selectedBundle = checkSelectedBundle(cartProduct.quantity);
+    return { price: cartProduct.price[selectedBundle]?.price_id, quantity: cartProduct.quantity };
+  }), [cartProducts]);
 
   const checkout = async (registerCustomerId) => {
     const customer_id = registerCustomerId || customerId;
