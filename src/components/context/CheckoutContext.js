@@ -26,7 +26,7 @@ export const CheckoutProvider = ({ children }) => {
         method: 'GET',
         headers: {
           ...headers,
-          'Authentication': `Bearer ${accessToken}`
+          'authorization': `Bearer ${accessToken}`
         }
       });
       const data = await res.json();
