@@ -56,14 +56,6 @@ export const CheckoutProvider = ({ children }) => {
     return { price: cartProduct.price[selectedBundle]?.price_id, quantity: cartProduct.quantity };
   }), [cartProducts]);
 
-  const stripeCheckout = async (url) => {
-    const res = await fetch(url, {
-      method: 'GET',
-      headers
-    });
-    console.log(res);
-  }
-
   const checkout = async (registerCustomerId) => {
     console.log(headers);
     const customer_id = registerCustomerId || customerId;
@@ -84,7 +76,6 @@ export const CheckoutProvider = ({ children }) => {
       } else {
         console.log(data.url)
         window.location = data.url;
-        // stripeCheckout(data.url);
       }
     }
   }
