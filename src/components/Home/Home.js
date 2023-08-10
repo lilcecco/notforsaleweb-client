@@ -19,7 +19,7 @@ const Home = () => {
       <div className="products-container" id="home-products">
         <h3>I Nostri Prodotti</h3>
         <div className="products mt-2">
-          {products.filter(product => product.name === 'test product').map(product => <Product key={`product-${product.id}`} product={product} />)}
+          {products.filter(product => product.name === 'test product' || product.name === 'UltraPods Gen 2 (seconda generazione)').map(product => <Product key={`product-${product.id}`} product={product} />)}
         </div>
       </div>
     </div>
