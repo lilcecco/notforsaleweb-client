@@ -26,8 +26,8 @@ export const ProductsProvider = ({ children }) => {
       if (data?.error) {
         alert(data.error);
       } else {
-        console.log(data.filter(product => product.id == 1)['price'])
-        console.log(data.filter(product => product.id == 2)['price'])
+        console.log(data.filter(product => product.id == 1)[0]['price'])
+        console.log(data.filter(product => product.id == 2)[0]['price'])
         // setProducts(data.map(product => { return { ...product, price: JSON.parse(product.price), images: JSON.parse(product.images) } }));
       }
     }
