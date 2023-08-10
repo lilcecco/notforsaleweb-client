@@ -28,8 +28,8 @@ export const ProductsProvider = ({ children }) => {
       } else {
         let prods = data.filter(product => product.id == 1)
         console.log(prods)
-        console.log(prods['price'])
-        console.log(JSON.parse(prods['price']));
+        console.log(prods[0]['price'])
+        console.log(JSON.parse(prods[0]['price']));
         // setProducts(data.map(product => { return { ...product, price: JSON.parse(product.price), images: JSON.parse(product.images) } }));
       }
     }
