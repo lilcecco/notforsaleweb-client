@@ -15,7 +15,7 @@ const ProductsPage = () => {
     <div className="products-page">
       <h2>{prodCategory}</h2>
       <div className="products mt-3">
-        {products.filter(product => product.name === 'test product 2').filter(product => product.category === prodCategory).map(product => <Product key={`product-${product.id}`} product={product} />)}
+        {products.filter(product => product.category === prodCategory).map(product => <Product key={`product-${product.id}`} product={product} />)}
       </div>
     </div>
   )
