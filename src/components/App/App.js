@@ -21,7 +21,7 @@ function App() {
   return (
     <div className="App">
       <div className="alert-banner">
-        <p>&#10071;COMPRA ULTRAPODS RICEVI UN EBOOK OMAGGIO&#10071;</p>
+        <p>&#10071;COMPRA ULTRAPODS RICEVI UN EBOOK OMAGGIO &#40;VALORE &euro;60&#40;&#10071;</p>
       </div>
       <ProductsProvider>
         <AuthProvider>
