@@ -12,6 +12,7 @@ import ShoppingCart from '../ShoppingCart';
 import Login from '../Login';
 import Checkout from '../Checkout';
 import PoliciesPage from '../PoliciesPage';
+import OrderConfirmation from '../OrderConfirmation';
 import Footer from '../Footer';
 
 import './App.css';
@@ -35,6 +36,7 @@ function App() {
               <Route path='/login' element={<Login />} />
               <Route path='/checkout' element={<Checkout />} />
               <Route path='/policiesPage/:page' element={<PoliciesPage />} />
+              <Route path='/orderConfirmation' element={<OrderConfirmation />} />
             </Routes>
           </CheckoutProvider>
         </AuthProvider>
