@@ -16,7 +16,6 @@ const ProductPage = () => {
   const [prodQuantity, setProdQuantity] = useState(3);
 
   const product = useMemo(() => products.find(product => product.id == id), [products, id]);
-  console.log(product);
   const price = useMemo(() => product ? product.price[selectedBundle].value : '', [product, selectedBundle]);
 
   // quando si aggiorna product aggiorna la quantità predefinita in base alla categoria
@@ -113,7 +112,7 @@ const ProductPage = () => {
           </>}
           <div className="product-btn cta-btn btn-style-2 mt-2" onClick={updateCartProducts}>Aggiungi al carrello</div>
           <div className="product-description mt-3">
-            {/* {product.description.map((productDescription, i) => <ProductDescriptionSection key={`prod-description-${i}`} productDescription={productDescription} />)} */}
+            {product.description.map((productDescription, i) => <ProductDescriptionSection key={`prod-description-${i}`} productDescription={productDescription} />)}
           </div>
         </div>
       </div>}
