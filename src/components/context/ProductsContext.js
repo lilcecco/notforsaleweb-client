@@ -26,7 +26,7 @@ export const ProductsProvider = ({ children }) => {
       if (data?.error) {
         alert(data.error);
       } else {
-        setProducts(data.map(product => { return { ...product, price: JSON.parse(product.price), images: JSON.parse(product.images) } }));
+        setProducts(data.map(product => { return { ...product, price: JSON.parse(product.price), images: JSON.parse(product.images), description: JSON.parse(product.description) } }));
       }
     }
 
