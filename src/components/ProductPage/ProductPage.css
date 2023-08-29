@@ -107,6 +107,13 @@
   line-height: 1.5;
 }
 
+.product-page-card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 50%;
+}
+
 /* Mobile */
 .cart-prod-quantity {
   display: none;
@@ -131,6 +138,10 @@
   }
 
   .product-description {
+    width: 100%;
+  }
+
+  .product-page-card-badges {
     width: 100%;
   }
 }

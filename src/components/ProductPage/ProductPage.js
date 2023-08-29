@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 
 import ProductsContext from '../context/ProductsContext';
+import { CardBadge } from '../Footer/Footer';
 
 import './ProductPage.css';
 
@@ -13,33 +14,37 @@ const ProductPage = () => {
   const { addToCart, cartProducts, setCartProducts, products } = useContext(ProductsContext);
 
   const [selectedBundle, setSelectedBundle] = useState(0);
-  const [prodQuantity, setProdQuantity] = useState(3);
+  const [prodQuantity, setProdQuantity] = useState(1);
 
   const product = useMemo(() => products.find(product => product.id == id), [products, id]);
   const price = useMemo(() => product ? product.price[selectedBundle].value : '', [product, selectedBundle]);
 
+  const cardBadges = ['amex', 'visa', 'mastercard', 'paypal', 'apple-pay'];
+
   // quando si aggiorna product aggiorna la quantità predefinita in base alla categoria
-  useEffect(() => {
-    if (product) {
-      if (product.category === 'UltraPods') {
-        setProdQuantity(3)
-      } else if (product.category === 'Ebooks') {
-        setProdQuantity(1)
-      }
-    }
-  }, [product]);
+  // useEffect(() => {
+  //   if (product) {
+  //     if (product.category === 'UltraPods') {
+  //       setProdQuantity(3)
+  //     } else if (product.category === 'Ebooks') {
+  //       setProdQuantity(1)
+  //     }
+  //   }
+  // }, [product]);
 
   const updateProdQuantity = (newProdQuantity) => {
 
-    if (newProdQuantity > 2 && newProdQuantity < 100) {
+    if (newProdQuantity > 0 && newProdQuantity < 100) {
       setProdQuantity(newProdQuantity);
 
-      if (newProdQuantity < 5) {
+      if (newProdQuantity < 3) {
         setSelectedBundle(0);
-      } else if (newProdQuantity > 4 && newProdQuantity < 10) {
+      } else if (newProdQuantity > 2 && newProdQuantity < 5) {
         setSelectedBundle(1);
-      } else {
+      } else if (newProdQuantity > 4 && newProdQuantity < 10) {
         setSelectedBundle(2);
+      } else {
+        setSelectedBundle(3);
       }
 
     }
@@ -50,12 +55,15 @@ const ProductPage = () => {
 
     switch (index) {
       case 0:
-        setProdQuantity(3);
+        setProdQuantity(1);
         break;
       case 1:
-        setProdQuantity(5);
+        setProdQuantity(3);
         break;
       case 2:
+        setProdQuantity(5);
+        break;
+      case 3:
         setProdQuantity(10);
         break;
     }
@@ -105,12 +113,16 @@ const ProductPage = () => {
             </div>
             <p className="mt-2" style={{ color: 'var(--color-5)' }}>Seleziona un budle e risparmia!</p>
             <div className="product-bundles">
-              <div className={`product-bundle-btn ${selectedBundle === 0 ? '-selected' : ''}`} onClick={() => onClickBundle(0)} >3x</div>
-              <div className={`product-bundle-btn ${selectedBundle === 1 ? '-selected' : ''}`} onClick={() => onClickBundle(1)} >5x</div>
-              <div className={`product-bundle-btn ${selectedBundle === 2 ? '-selected' : ''}`} onClick={() => onClickBundle(2)} >10x</div>
+              <div className={`product-bundle-btn ${selectedBundle === 0 ? '-selected' : ''}`} onClick={() => onClickBundle(0)} >1x</div>
+              <div className={`product-bundle-btn ${selectedBundle === 1 ? '-selected' : ''}`} onClick={() => onClickBundle(1)} >3x</div>
+              <div className={`product-bundle-btn ${selectedBundle === 2 ? '-selected' : ''}`} onClick={() => onClickBundle(2)} >5x</div>
+              <div className={`product-bundle-btn ${selectedBundle === 3 ? '-selected' : ''}`} onClick={() => onClickBundle(3)} >10x</div>
             </div>
           </>}
           <div className="product-btn cta-btn btn-style-2 mt-2" onClick={updateCartProducts}>Aggiungi al carrello</div>
+          <div className="product-page-card-badges mt-1">
+            {cardBadges.map((cardBadge, id) => <CardBadge key={`card-badge-${id}`} cardBadge={cardBadge} />)}
+          </div>
           <div className="product-description mt-3">
             {product.description.map((productDescription, i) => <ProductDescriptionSection key={`prod-description-${i}`} productDescription={productDescription} />)}
           </div>
@@ -170,3 +182,12 @@ export default ProductPage
 
 // guida ultrapods + iphone
 // [["Info prodotto", "Le guide contengono tutte le informazioni acquisite da noi negli anni che abbiamo deciso di divulgare per insegnarvi nel migliore dei modi le tecniche per la compravendita degli iphone e delle UltraPods nel mercato italiano evitando: truffe, contestazioni da parte dei clienti, ecc.", "Abbiamo letteralmente creato una bomba (basti guardare i risultati dei nostri studenti), la maggior parte dei ragazzi recupera l'investimento fatto nel giro di poche ore, i più motivati riescono addirittura a creare un vero e proprio business da 10K/mese!!! Bro se fossi in te acquiterei subito, prima che i prezzi si alzino..."], ["Cosa comprende il pacchetto", "LA GUIDA DA ZERO AD IMPRENDITORE CON ULTRAPODS (dove ti sveleremo tutti i nostri segreti per la vendita di UltraPods)", "LA GUIDA FATTURA DA ZERO CON GLI IPHONE (dove ti sveleremo tutti i nostri segreti per l'acquisto e la vendita di iphone)"], ["Le nostre garanzie", "Pagamenti sicuri con carta di credito", "Codice di tracciamento per ogni ordine", "Zero costi nascosti", "Spedizione Gratuita"]]
+
+// test
+// [{"price_id":"price_1NkOhFHPDZBrQxAmD1MhHwBt", "value":"39,99"},{"price_id":"price_1NkOhmHPDZBrQxAmuODV8rl9", "value":"34,99"}, {"price_id":"price_1NkOiFHPDZBrQxAmI4sZP0kK", "value":"27,99"}, {"price_id":"price_1NkOidHPDZBrQxAmtHIYKeCn", "value":"24,99"}]
+
+// production
+// {"price_id":"price_1NkOoYHPDZBrQxAmHpxJznIL", "value":"39,99"},
+// {"price_id":"price_1NkOqfHPDZBrQxAmjbxzvDxL", "value":"49,99"},
+// {"price_id":"price_1NkOrCHPDZBrQxAmyVDEYc7O", "value":"59,99"},
+// {"price_id":"price_1NkOs6HPDZBrQxAmhLLP76HS", "value":"69,99"},
