@@ -18,6 +18,7 @@ const ProductPage = () => {
 
   const product = useMemo(() => products.find(product => product.id == id), [products, id]);
   const price = useMemo(() => product ? product.price[selectedBundle].value : '', [product, selectedBundle]);
+  console.log(product);
 
   const cardBadges = ['amex', 'visa', 'mastercard', 'paypal', 'apple-pay'];
 
@@ -182,9 +183,6 @@ export default ProductPage
 
 // guida ultrapods + iphone
 // [["Info prodotto", "Le guide contengono tutte le informazioni acquisite da noi negli anni che abbiamo deciso di divulgare per insegnarvi nel migliore dei modi le tecniche per la compravendita degli iphone e delle UltraPods nel mercato italiano evitando: truffe, contestazioni da parte dei clienti, ecc.", "Abbiamo letteralmente creato una bomba (basti guardare i risultati dei nostri studenti), la maggior parte dei ragazzi recupera l'investimento fatto nel giro di poche ore, i più motivati riescono addirittura a creare un vero e proprio business da 10K/mese!!! Bro se fossi in te acquiterei subito, prima che i prezzi si alzino..."], ["Cosa comprende il pacchetto", "LA GUIDA DA ZERO AD IMPRENDITORE CON ULTRAPODS (dove ti sveleremo tutti i nostri segreti per la vendita di UltraPods)", "LA GUIDA FATTURA DA ZERO CON GLI IPHONE (dove ti sveleremo tutti i nostri segreti per l'acquisto e la vendita di iphone)"], ["Le nostre garanzie", "Pagamenti sicuri con carta di credito", "Codice di tracciamento per ogni ordine", "Zero costi nascosti", "Spedizione Gratuita"]]
-
-// test
-// [{"price_id":"price_1NkOhFHPDZBrQxAmD1MhHwBt", "value":"39,99"},{"price_id":"price_1NkOhmHPDZBrQxAmuODV8rl9", "value":"34,99"}, {"price_id":"price_1NkOiFHPDZBrQxAmI4sZP0kK", "value":"27,99"}, {"price_id":"price_1NkOidHPDZBrQxAmtHIYKeCn", "value":"24,99"}]
 
 // production
 // {"price_id":"price_1NkOoYHPDZBrQxAmHpxJznIL", "value":"39,99"},
