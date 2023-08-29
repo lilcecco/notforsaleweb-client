@@ -40,14 +40,15 @@ export const CheckoutProvider = ({ children }) => {
   const checkSelectedBundle = (prodQuantity) => {
     let selectedBundle;
 
-    if (prodQuantity < 3) {
+
+    // (prodQuantity > 2 && prodQuantity < 5)
+
+    if (prodQuantity < 5) {
       selectedBundle = 0;
-    } else if (prodQuantity > 2 && prodQuantity < 5) {
-      selectedBundle = 1;
     } else if (prodQuantity > 4 && prodQuantity < 10) {
-      selectedBundle = 2;
+      selectedBundle = 1;
     } else {
-      selectedBundle = 3;
+      selectedBundle = 2;
     }
 
     return selectedBundle;
