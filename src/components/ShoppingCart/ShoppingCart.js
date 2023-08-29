@@ -55,7 +55,7 @@ const CartProduct = ({ cartProduct }) => {
   const price = useMemo(() => cartProduct ? cartProduct.price[selectedBundle].value : '', [selectedBundle]);
 
   const updateQuantity = (newQuantity) => {
-    if (newQuantity < 3 || cartProduct.category === 'Ebooks') return;
+    if (newQuantity < 1 || cartProduct.category === 'Ebooks') return;
     else {
       setCartProducts(JSON.stringify(cartProducts.map(cartProd => cartProd.id === cartProduct.id ? { ...cartProd, quantity: newQuantity } : cartProd)));
     }
