@@ -22,7 +22,7 @@ export const CheckoutProvider = ({ children }) => {
 
   useEffect(() => {
     const getCustomerId = async () => {
-      const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/data/customerId`, {
+      const res = await fetch(`/api/data/customerId`, {
         method: 'GET',
         headers: {
           ...headers,
@@ -40,12 +40,14 @@ export const CheckoutProvider = ({ children }) => {
   const checkSelectedBundle = (prodQuantity) => {
     let selectedBundle;
 
-    if (prodQuantity < 5) {
+    if (prodQuantity < 3) {
       selectedBundle = 0;
-    } else if (prodQuantity > 4 && prodQuantity < 10) {
+    } else if (prodQuantity > 2 && prodQuantity < 5) {
       selectedBundle = 1;
-    } else {
+    } else if (prodQuantity > 4 && prodQuantity < 10) {
       selectedBundle = 2;
+    } else {
+      selectedBundle = 3;
     }
 
     return selectedBundle;
@@ -59,7 +61,7 @@ export const CheckoutProvider = ({ children }) => {
   const checkout = async (registerCustomerId) => {
     const customer_id = registerCustomerId || customerId;
 
-    const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/checkout/`, {
+    const res = await fetch(`/api/checkout/`, {
       method: 'POST',
       headers: {
         ...headers,
@@ -79,7 +81,7 @@ export const CheckoutProvider = ({ children }) => {
   }
 
   const createPortalSession = async () => {
-    const res = await fetch(`https://notforsaleweb-a185cdef4039.herokuapp.com/api/checkout/createPortalSession`, {
+    const res = await fetch(`/api/checkout/createPortalSession`, {
       method: 'POST',
       headers: {
         ...headers,
