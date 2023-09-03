@@ -5,6 +5,7 @@
   padding: 30px;
   background-color: var(--color-2);
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  z-index: 999;
 }
 
 .add-cart-alert-header {

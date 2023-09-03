@@ -10,7 +10,8 @@
 
 .card-circuit-badges {
   display: flex;
-  gap: 10px;
+  justify-content: center;
+  gap: 20px 10px;
   padding: 40px 0;
 }
 
@@ -52,7 +53,7 @@
   }
 
   .card-circuit-badges {
-    width: 320px;
+    width: 265px;
     flex-wrap: wrap;
   }
 }
