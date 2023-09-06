@@ -123,7 +123,7 @@ export const CheckoutBox = ({ onCheckout }) => {
         <p>Totale ordine</p>
         <p>€{String(totalAmount.toFixed(2)).replace('.', ',')}</p>
       </div>
-      <div className="cta-btn btn-style-2" onClick={onCheckout}>{userLogged ? 'Check out' : 'Registrati'}</div>
+      <div className="cta-btn btn-style-2" onClick={onCheckout}>{userLogged ? 'Check out' : 'Registrati e prosegui'}</div>
     </div>
   )
 }
