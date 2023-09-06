@@ -46,6 +46,16 @@
   font-size: 14px;
 }
 
+.pwd-error-message {
+  width: 70%;
+  color: red;
+}
+
+.pwd-error-message li {
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
 /* Mobile */
 @media (max-width: 992px) {
   .checkout-container {

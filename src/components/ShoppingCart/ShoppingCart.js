@@ -11,7 +11,7 @@ import './ShoppingCart.css';
 const ShoppingCart = () => {
   const { cartProducts } = useContext(ProductsContext);
   const { checkout } = useContext(CheckoutContext);
-  const { userLogged } = useContext(AuthContext)
+  const { userLogged } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -97,6 +97,7 @@ const CartProduct = ({ cartProduct }) => {
 export const CheckoutBox = ({ onCheckout }) => {
   const { cartProducts } = useContext(ProductsContext);
   const { checkSelectedBundle } = useContext(CheckoutContext);
+  const { userLogged } = useContext(AuthContext);
 
   const totalAmount = useMemo(() => cartProducts.reduce((total, currentProd) => {
     const selectedBundle = checkSelectedBundle(currentProd.quantity);
@@ -122,7 +123,7 @@ export const CheckoutBox = ({ onCheckout }) => {
         <p>Totale ordine</p>
         <p>€{String(totalAmount.toFixed(2)).replace('.', ',')}</p>
       </div>
-      <div className="cta-btn btn-style-2" onClick={onCheckout}>Check out</div>
+      <div className="cta-btn btn-style-2" onClick={onCheckout}>{userLogged ? 'Check out' : 'Registrati'}</div>
     </div>
   )
 }

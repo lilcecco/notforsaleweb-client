@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import AuthContext from '../context/AuthContext';
 import CheckoutContext from '../context/CheckoutContext';
@@ -12,6 +12,8 @@ const Checkout = () => {
   const { registerUser, loginUser } = useContext(AuthContext);
   const { checkout } = useContext(CheckoutContext);
 
+  const navigate = useNavigate();
+
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [address, setAddress] = useState('');
@@ -22,12 +24,16 @@ const Checkout = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  const [pwdErrorMessage, setPwdErrorMessage] = useState(false);
+
   const onCheckout = async () => {
+    setPwdErrorMessage(false);
+
     //check
-    if (!name || !surname || !address || !country || !city || !zip_code || !email || !password || !confirmPassword) return alert('empty fields');
-    if (!/[\w.-]+@[a-z-]+\.[a-z]{2,3}/.test(email)) return alert('invalid email address');
-    if (password.length < 8 || !/[a-z]/.test(password) || !/[A-Z]/.test(password) || !/[0-9]/.test(password)) return alert('invalid password');
-    if (password !== confirmPassword) return alert('passwords do not match');
+    if (!name || !surname || !address || !country || !city || !zip_code || !email || !password || !confirmPassword) return alert('Assicurati che tutti i campi siano stati riempiti');
+    if (!/[\w.-]+@[a-z-]+\.[a-z]{2,3}/.test(email)) return alert('Indirizzo email non valido');
+    if (password.length < 8 || !/[a-z]/.test(password) || !/[A-Z]/.test(password) || !/[0-9]/.test(password)) return setPwdErrorMessage(true);
+    if (password !== confirmPassword) return alert('Le password non coincidono');
 
     // register user
     const registerData = await registerUser({ name, surname, address, country, city, zip_code, email, password });
@@ -45,11 +51,13 @@ const Checkout = () => {
 
     // checkout order
     checkout(registerData.customer_id);
+
+    // navigate('/paymentMethod');
   }
 
   return (
     <div className="checkout">
-      <h2>Check out</h2>
+      <h2>Registrazione</h2>
       <div className="checkout-container">
         <form className="checkout-form">
           <p className="checkout-logged-alert mt-2">Hai già un account? <Link to='/login' style={{ color: 'var(--color-3)', textDecoration: 'underline' }}>Accedi prima di proseguire</Link></p>
@@ -99,6 +107,7 @@ const Checkout = () => {
               <input type="password" name="confirmPassword" id="confirm-password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
             </div>
           </div>
+          {pwdErrorMessage && <PwdErrorMessage />}
         </form>
         <CheckoutBox onCheckout={onCheckout} />
       </div>
@@ -106,4 +115,18 @@ const Checkout = () => {
   )
 }
 
-export default Checkout
+const PwdErrorMessage = () => {
+  return (
+    <div className="pwd-error-message mt-1">
+      <p>La password deve contenere:</p>
+      <ul>
+        <li>Almeno 8 caratteri</li>
+        <li>Un carattere minuscolo</li>
+        <li>Un carattere maiuscolo</li>
+        <li>Un carattere numerico</li>
+      </ul>
+    </div>
+  )
+}
+
+export default Checkout;
