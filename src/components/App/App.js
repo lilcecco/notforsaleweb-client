@@ -14,6 +14,7 @@ import Checkout from '../Checkout';
 import PoliciesPage from '../PoliciesPage';
 import OrderConfirmation from '../OrderConfirmation';
 import About from '../About';
+import ResetPassword from '../ResetPassword';
 import Footer from '../Footer';
 
 import './App.css';
@@ -23,7 +24,7 @@ function App() {
   return (
     <div className="App">
       <div className="alert-banner">
-        <p>&#128230; SPEDIZIONE GRATUITA &#128230;</p>
+        <p>SITO IN STAGING</p>
       </div>
       <ProductsProvider>
         <AuthProvider>
@@ -39,6 +40,7 @@ function App() {
               <Route path='/policiesPage/:page' element={<PoliciesPage />} />
               <Route path='/orderConfirmation' element={<OrderConfirmation />} />
               <Route path='/about' element={<About />} />
+              <Route path='/resetPassword/:token' element={<ResetPassword />} />
             </Routes>
           </CheckoutProvider>
         </AuthProvider>

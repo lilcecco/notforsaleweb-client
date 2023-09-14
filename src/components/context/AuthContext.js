@@ -1,4 +1,5 @@
 import { useState, createContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import useCookie from '../customHooks/useCookie';
 
@@ -7,6 +8,8 @@ const AuthContext = createContext();
 export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
+  const navigate = useNavigate()
+
   const [accessToken, setAddressToken] = useCookie('accessToken', '');
   const [userLogged, setUserLogged ] = useState(false);
 
@@ -67,7 +70,51 @@ export const AuthProvider = ({ children }) => {
     setUserLogged(false);
   }
 
-  const contextData = { accessToken, userLogged, registerUser, loginUser, setUserLogged, logout }
+  const resetPasswordEmail = async (email) => {
+    const res = await fetch('https://notforsaleweb-a185cdef4039.herokuapp.com/api/auth/resetPasswordEmail', {
+      method: 'POST',
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email })
+    });
+    const data = await res.json();
+    if (res.status === 200) {
+      if (data?.error) {
+        alert(data.error);
+      } else {
+        alert('Email inviata con successo');
+      }
+    } else {
+      alert('Qualcosa è andato storto');
+    }
+  }
+
+  const resetPassword = async ({ updatedPassword, token }) => {
+    const res = await fetch('https://notforsaleweb-a185cdef4039.herokuapp.com/api/auth/resetPassword', {
+      method: 'PUT',
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${ token }`
+      },
+      body: JSON.stringify({ updatedPassword })
+    });
+    const data = await res.json();
+    if (res.status === 200) {
+      if (data?.error) {
+        alert(data.error);
+      } else {
+        alert('Password reimposta con successo');
+        navigate('/login');
+      }
+    } else {
+      alert('Qualcosa è andato storto');
+    }
+  }
+
+  const contextData = { accessToken, userLogged, registerUser, loginUser, setUserLogged, logout, resetPasswordEmail, resetPassword }
 
   return (
     <AuthContext.Provider value={contextData}>

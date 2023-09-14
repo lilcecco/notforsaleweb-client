@@ -99,7 +99,7 @@ const Checkout = () => {
           </div>
           <div className="checkout-row mt-1">
             <div className="checkout-collumn">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password" className="checkout-pwd">Password</label>
               <input type="password" name="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </div>
             <div className="checkout-collumn">
@@ -115,9 +115,9 @@ const Checkout = () => {
   )
 }
 
-const PwdErrorMessage = () => {
+export const PwdErrorMessage = () => {
   return (
-    <div className="pwd-error-message mt-1">
+    <div className="pwd-error-message">
       <p>La password deve contenere:</p>
       <ul>
         <li>Almeno 8 caratteri</li>

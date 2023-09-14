@@ -15,8 +15,8 @@ const Login = () => {
     e.preventDefault();
 
     // check fields
-    if (email === '' || password === '') return alert('empty fields');
-    if (!/[\w.-]+@[a-z-]+\.[a-z]{2,3}/.test(email)) return alert('invalid email address');
+    if (email === '' || password === '') return alert('Assicurati che tutti i campi siano stati riempiti');
+    if (!/[\w.-]+@[a-z-]+\.[a-z]{2,3}/.test(email)) return alert('Indirizzo email non valido');
 
     const loginData = await loginUser({ email, password });
     if (loginData?.error) {
@@ -37,7 +37,7 @@ const Login = () => {
         <div className="login-input-container">
           <div className="forgot-password-container">
             <label htmlFor="password">Password</label>
-            <div className="forgot-password-cta">Password dimenticata?</div>
+            <Link to="/resetPassword/email"><div className="forgot-password-cta" >Password dimenticata?</div></Link>
           </div>
           <input type="password" name="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
