@@ -24,7 +24,7 @@ function App() {
   return (
     <div className="App">
       <div className="alert-banner">
-        <p>&128230; SPEDIZIONE GRATUITA &128230;</p>
+        <p>&#128230; SPEDIZIONE GRATUITA PER LE PROSSIME 24H &#128230;</p>
       </div>
       <ProductsProvider>
         <AuthProvider>
