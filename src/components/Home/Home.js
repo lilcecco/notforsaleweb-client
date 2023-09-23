@@ -12,8 +12,8 @@ const Home = () => {
     <div className="Home">
       <div className="hero">
         <img src="/img/hero-bg.jpg" alt="" className="hero-bg img-res" />
-        <h1>UltraPods</h1>
-        <h4 className="mt-1">Rendi la tua esperienza musicale Ultra</h4>
+        <h1>Business Ebooks</h1>
+        <h4 className="mt-1">Rendi la tua esperienza di apprendimento Ultra</h4>
         <div className="cta-btn mt-2"><a href="#home-products">Compra ora</a></div>
       </div>
       <div className="products-container" id="home-products">

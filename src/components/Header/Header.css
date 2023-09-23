@@ -87,6 +87,11 @@
     gap: 20px;
   }
 
+  .header-menu-m li:nth-child(1) {
+    display: flex;
+    justify-content: right;
+  }
+
   .header-menu-hidden {
     left: -100%;
   }

@@ -38,7 +38,6 @@ const Header = () => {
           </li>
           <li className="mt-1" onClick={() => setMenuOpen(!menuOpen)}><Link to="/">Home</Link></li>
           <li onClick={() => setMenuOpen(!menuOpen)}><Link to="/about">About us</Link></li>
-          <li onClick={() => setMenuOpen(!menuOpen)}><Link to="/products/UltraPods">UltraPods</Link></li>
           <li onClick={() => setMenuOpen(!menuOpen)}><Link to="/products/Ebooks">Ebooks</Link></li>
         </ul>
       </div>
